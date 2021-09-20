@@ -14,7 +14,9 @@ const runScript = async () => {
     const input = document.querySelector("#password-input");
     const button = document.querySelector("#password-button");
     const output = document.querySelector("#password-output");
+    const checkbox = document.querySelector("#zxcvbn-checkbox");
     const checkPassword = async () => {
+        const zxcvbn_enabled = checkbox.checked;
         const password = input.value;
         const zxcvbnScore = zxcvbnts.core.zxcvbn(password);
         const defaultScore =
@@ -23,29 +25,39 @@ const runScript = async () => {
             (password.length >= 4 && !!password.match(/\d/)) +
             (password.length >= 7 && !!password.match(/\d/));
         const score = zxcvbn_enabled ? zxcvbnScore.score : defaultScore;
+        let feedback = `<br>Złamanie tego hasła zajęło by ${zxcvbnScore.guesses} prób.
+        <br>Oznacza to ${zxcvbnScore.crackTimesSeconds.onlineNoThrottling10PerSecond} sekund ataku online (bez throttlingu)
+        <br>Albo ${zxcvbnScore.crackTimesSeconds.offlineFastHashing1e10PerSecond} sekund szybkiego ataku offline`;
+        if (
+            !!zxcvbnScore.feedback.suggestions.length ||
+            !!zxcvbnScore.feedback.warning.length
+        ) {
+            feedback += `<br>Ostrzeżenia: ${zxcvbnScore.feedback.warning}<br>Sugestie: ${zxcvbnScore.feedback.suggestions}`;
+        }
         switch (score) {
             case -1:
                 output.innerText = "WPISZ HASŁO!";
                 output.style.color = "red";
                 break;
             case 0:
-                output.innerText = "SŁABE";
+                output.innerHTML = "SŁABE" + (zxcvbn_enabled ? feedback : "");
                 output.style.color = "yellow";
                 break;
             case 1:
-                output.innerText = "ŚREDNIE";
+                output.innerHTML = "ŚREDNIE" + (zxcvbn_enabled ? feedback : "");
                 output.style.color = "blue";
                 break;
             case 2:
-                output.innerText = "DOBRE";
+                output.innerHTML = "DOBRE" + (zxcvbn_enabled ? feedback : "");
                 output.style.color = "green";
                 break;
             case 3:
-                output.innerText = "BARDZO DOBRE";
+                output.innerHTML =
+                    "BARDZO DOBRE" + (zxcvbn_enabled ? feedback : "");
                 output.style.color = "green";
                 break;
             case 4:
-                output.innerText = "ŚWIETNE";
+                output.innerHTML = "ŚWIETNE" + (zxcvbn_enabled ? feedback : "");
                 output.style.color = "green";
                 break;
             default:

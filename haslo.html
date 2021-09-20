@@ -30,8 +30,18 @@
         <main class="right">
             <p class="password-input-group">
                 Twoje hasło:
-                <input id="password-input" type="password" />
+                <input
+                    name="password-input"
+                    id="password-input"
+                    type="password"
+                />
                 <button id="password-button">Sprawdź</button>
+                <label for="zxcvbn-checkbox">Użyj zxcvbn</label>
+                <input
+                    type="checkbox"
+                    name="zxcvbn-checkbox"
+                    id="zxcvbn-checkbox"
+                />
             </p>
             <output id="password-output"></output>
         </main>
