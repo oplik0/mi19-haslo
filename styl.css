@@ -1,0 +1,90 @@
+body {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "nav main"
+        "footer footer";
+    grid-template-rows: 50px 600px 1fr;
+    grid-template-columns: 25% 75%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    place-items: start;
+}
+nav {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content;
+
+    grid-area: nav;
+    align-self: start;
+    width: 100%;
+    background-color: #b3c6d9;
+    height: 100%;
+}
+footer {
+    grid-area: footer;
+    text-align: right;
+    width: 100%;
+    background-color: #829eb9;
+    height: 100%;
+}
+p {
+    margin: 30px;
+}
+header {
+    grid-area: header;
+    text-align: center;
+    width: 100%;
+    background-color: #829eb9;
+    font-family: Arial;
+    height: 50px;
+    height: 100%;
+}
+header > h1 {
+    margin: 0;
+}
+main {
+    grid-area: main;
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    align-self: start;
+    justify-self: center;
+    display: grid;
+    background-color: #e0e9f1;
+    text-align: center;
+    grid-template-rows: min-content;
+}
+h1 {
+    text-align: center;
+}
+.center-image {
+    justify-self: center;
+    margin: 30px;
+    padding: 10px;
+    border: 2px dashed #b3c6d9;
+}
+
+table {
+    margin: 30px;
+    border: 2px solid;
+    width: 70%;
+}
+th {
+    background-color: #b3c6d9;
+    border: 2px solid;
+}
+td {
+    border: 2px solid;
+}
+tr:hover,
+tr:hover > th {
+    background-color: blue;
+    color: white;
+}
+
+.password-input-group {
+    height: 50px;
+}
