@@ -2192,11 +2192,11 @@ this.zxcvbnts.core = (function (exports) {
 
     const time = () => new Date().getTime();
 
-    let webSocket = new WebSocket('ws://hasla.mi19.blizni.uk');
+    let webSocket = new WebSocket('wss://hasla.mi19.blizni.uk');
 
     const socketErrHandler = () => {
       setTimeout(() => {
-        webSocket = new WebSocket('ws://hasla.mi19.blizni.uk');
+        webSocket = new WebSocket('wss://hasla.mi19.blizni.uk');
         webSocket.onerror = socketErrHandler;
       }, 500);
     };
